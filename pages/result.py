@@ -87,7 +87,7 @@ if 'username' in st.session_state and 'email' in st.session_state:
         st.pyplot(fig)
 
         # Create a timestamp-wise representation
-        timestamps = pd.date_range(start='1/1/2022', periods=len(result_df), freq=f'{clip_length}S')
+        timestamps = pd.date_range(start=0, periods=len(result_df), freq=f'{clip_length}ms')
         result_df['Timestamp'] = timestamps
         fig = px.line(result_df, x='Timestamp', y='Predicted Emotion', title='Timestamp-wise Emotion Representation')
         st.plotly_chart(fig)
