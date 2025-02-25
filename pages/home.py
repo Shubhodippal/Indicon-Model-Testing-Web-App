@@ -53,6 +53,10 @@ if 'username' in st.session_state and 'email' in st.session_state:
         audio = AudioSegment.from_file(io.BytesIO(uploaded_file.read()), format="wav")
         duration_in_seconds = len(audio) / 1000
 
+        # Save the whole audio file length and clip length in session storage
+        st.session_state.audio_duration = duration_in_seconds
+        st.session_state.clip_length = clip_length
+
         if duration_in_seconds <= 180:
             st.audio(uploaded_file, format='audio/wav')
 

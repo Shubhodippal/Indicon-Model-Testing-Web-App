@@ -38,6 +38,10 @@ if 'username' in st.session_state and 'email' in st.session_state:
         scaler = joblib.load(SCALER_PATH)
         encoder = joblib.load(ENCODER_PATH)
 
+        # Retrieve audio file length and clip length from session storage
+        audio_file_length = st.session_state.get('audio_file_length', 2)
+        clip_length = st.session_state.get('clip_length', 60)  # Default to 1 second if not set
+
         # Emotion labels mapping
         emotion_labels = {
             1: "ANGRY",
@@ -83,7 +87,8 @@ if 'username' in st.session_state and 'email' in st.session_state:
         st.pyplot(fig)
 
         # Create a timestamp-wise representation
-        result_df['Timestamp'] = pd.date_range(start='1/1/2022', periods=len(result_df), freq='S')
+        timestamps = pd.date_range(start='1/1/2022', periods=len(result_df), freq=f'{clip_length}S')
+        result_df['Timestamp'] = timestamps
         fig = px.line(result_df, x='Timestamp', y='Predicted Emotion', title='Timestamp-wise Emotion Representation')
         st.plotly_chart(fig)
 
