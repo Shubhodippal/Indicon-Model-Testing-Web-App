@@ -1,5 +1,5 @@
-numba == 0.56.4
 numpy == 1.23.5
+numba == 0.56.4
 pandas == 1.5.3
 plotly == 6.0.0
 pydub == 0.25.1
